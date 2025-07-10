@@ -54,7 +54,7 @@ async def initiate_task(background_task: BackgroundTasks):
     })
 
     # register the function (task) to be ran in the backgrund
-    background_task.add_task(count_to, 1_000_000, job_id, update_task)
+    background_task.add_task(count_to, 1_000_000_000, job_id, update_task)
 
     # returns immediately to the client
     return {
