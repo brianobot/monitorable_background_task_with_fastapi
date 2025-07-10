@@ -9,7 +9,7 @@ app = FastAPI()
 task_store: dict[str, dict] = {}
 
 
-def count_to(n: int, job_id: str, update_function: Callable[..., Awaitable[None]]):
+def count_to(n: int, job_id: str, update_progress: Callable[..., Awaitable[None]]):
     """
     Iterates from 1 up to n and returns the values of n
 
@@ -17,11 +17,11 @@ def count_to(n: int, job_id: str, update_function: Callable[..., Awaitable[None]
     """
     result = 1
     for i in range(1, n):
-        update_function(job_id, "processing", (i / n) * 100)
+        update_progress(job_id, "processing", (i / n) * 100)
         print(f"{i}")
         result = i
 
-    update_function(job_id, "completed", 100, result, ended_at=time.time())
+    update_progress(job_id, "completed", 100, result, ended_at=time.time())
     return result
 
 
